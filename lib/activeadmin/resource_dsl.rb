@@ -33,7 +33,9 @@ module ActiveAdmin
                        JSON.parse(json_data)
               end
               object.send(nested_key).each { |nested_object|
-                next if nested_attributes_with_index[index]['id'] != nested_object.id.to_s
+                if nested_attributes_with_index[index]['id'] && (nested_attributes_with_index[index]['id'] != nested_object.id.to_s)
+                  next
+                end
 
                 nested_object.attributes = { key => data }
               }
